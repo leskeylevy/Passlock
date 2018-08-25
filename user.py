@@ -31,7 +31,15 @@ class User:
         User.user_list.remove(self)
 
     @classmethod
-    def find_by_last_name(cls,last_name):
+    def find_by_last_name(cls,lname):
         for user in cls.user_list:
-            if user.last_name == last_name:
+            if user.last_name == lname:
                 return user
+
+    @classmethod
+    def user_exists(cls,lname):
+        for user in cls.user_list:
+            if user.last_name == lname:
+                return True
+            return False
+

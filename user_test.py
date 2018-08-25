@@ -51,8 +51,17 @@ class TestUser(unittest.TestCase):
         test_user = User('leskey', 'levy', 'leskeylevy@gmail.com', 'Nairobi')
         test_user.save_user()
 
-        found_user=User.find_by_last_name('levy')
+        found_user = User.find_by_last_name('levy')
         self.assertEqual(found_user.last_name, test_user.last_name)
+
+    def test_user_exists(self):
+        self.new_user.save_user()
+        test_user = User('leskey', 'levy', 'leskeylevy@gmail.com', 'Nairobi')
+        test_user.save_user()
+
+        user_exists = User.user_exists('levy')
+        self.assertTrue(user_exists)
+
 
 if __name__ == '__main__':
     unittest.main()
