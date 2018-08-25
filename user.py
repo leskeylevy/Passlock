@@ -26,3 +26,12 @@ class User:
         save method
         '''
         User.user_list.append(self)
+
+    def delete_user(self):
+        User.user_list.remove(self)
+
+    @classmethod
+    def find_by_last_name(cls,last_name):
+        for user in cls.user_list:
+            if user.last_name == last_name:
+                return user
