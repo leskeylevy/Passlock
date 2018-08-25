@@ -20,3 +20,9 @@ class User:
         self.last_name = last_name
         self.email = email
         self.location = location
+
+    def save_user(self):
+        '''
+        save method
+        '''
+        User.user_list.append(self)
