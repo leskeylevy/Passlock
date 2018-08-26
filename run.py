@@ -62,6 +62,14 @@ def create_credential(site_name, userName, password, emailUsed):
     return new_credential
 
 
+def save_credential(credential):
+    '''
+    function to save credential created
+    '''
+    credential.save_credential()
+
+
+
 
 
 def main():
