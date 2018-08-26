@@ -2,11 +2,11 @@
 from user import User
 
 
-def create_user(fname, lname, email, location):
+def create_user(fname, lname, email, Password):
     '''
     function to create a new user
     '''
-    new_user = User(fname, lname, email, location)
+    new_user = User(fname, lname, email, Password)
     return new_user
 
 
@@ -36,6 +36,14 @@ def check_existing_user(lname):
     checking if user exists
     '''
     return User.user_exists()
+
+def display_user():
+    '''
+    function to return the saved user
+    :return:
+    '''
+    return User.display_user()
+
 def main():
     print("Hello Welcome to  Passlock.What is your name?")
     user_name = input()
@@ -44,7 +52,8 @@ def main():
     print('\n')
 
     while True:
-            print("Use these short codes to navigate the app :\n cu -> Sign up.\n da -> Display your account.\n ln -> Login.\n ex ->exit Passlock.")
+            print("Use these short codes to navigate the app :\n cu -> Sign up.\n da -> Display your account.\n ln -> "
+                  "Login.\n ex ->exit Passlock.")
 
             short_code = input().lower()
 
@@ -61,35 +70,47 @@ def main():
                 print("Email address ...")
                 e_address = input()
 
-                print("Your location .....")
-                y_location = input()
+                print("Your Password .....")
+                print("*"*40)
+                pwd = input()
 
-                save_users(create_user(f_name,l_name,e_address,y_location))
+                save_users(create_user(f_name,l_name,e_address,pwd))
                 print('\n')
-                print(f"New User  {f_name} {l_name} created")
+                print(f" A New account for {f_name} {l_name} created")
+                print(f"You can now login to your account {l_name} using your Password.")
                 print('\n')
 
-            elif short_code == 'fu':
+            elif short_code == 'da':
 
-                if find_user():
-                        print("Enter the last name of the user you want to search for")
-
-                        search_lname = input()
-                        if check_existing_user(search_lname):
-                            search_user = find_user(search_lname)
-                            print(f"{search_user.first_name}  {search_user.last_name}")
-                            print('-' * 20)
-                            print(f"Email address.......{search_user.email}")
-                            print(f"Location......{search_user.location}")
-
+                if display_user():
+                        print("Here is your account Details ")
+                        print('\n')
+                        for user in display_user():
+                            print(f"Full name:{user.first_name} {user.last_name} user name:{user.last_name} Email {user.email}")
+                            print('\n')
                         else:
-                            print("That user does not exist")
+                            print('\n')
+                            print("That user does not exist. Sign up to create user account")
+                            print('\n')
 
-                elif short_code == "ex":
-                        print("BYE!......")
-                        break
+                elif short_code == "ln":
+                        print("please Enter your last name.")
+                        account_name = input()
+                        print("please enter your password")
+                        password = input()
+                        if password == pwd:
+                            print("you are now logged in")
+                            print('-'*20)
+
+
                 else:
-                        print("I really didn't get that.Please use the short codes")
+                        print("Wrong password try again!")
+            elif short_code == "ex":
+                        print(f"Thanks {user_name} and feel free to recomend  our services to your friends ")
+                        break
+            else:
+                    print("I really didnt get that.Please use the short codes")
+
 
 
 if __name__ =='__main__':

@@ -14,7 +14,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user.first_name, 'leskey')
         self.assertEqual(self.new_user.last_name, 'levy')
         self.assertEqual(self.new_user.email, 'leskeylevy@gmail.com')
-        self.assertEqual(self.new_user.location, 'Nairobi')
+        self.assertEqual(self.new_user.Password, 'Nairobi')
 
     def tearDown(self):
         User.user_list = []
