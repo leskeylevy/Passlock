@@ -69,7 +69,33 @@ def save_credential(credential):
     credential.save_credential()
 
 
+def del_credential(credential):
+    '''
+    function to delete credential
+    '''
+    credential.delete_credential()
 
+
+def find_credential(name):
+    '''
+   function that finds credentials by site name and returns the credential
+    '''
+    return Credential.find_by_name(name)
+
+
+def check_credential_exists(name):
+    '''
+    function that checks if the credential exists with that site name
+    :return: boolean
+    '''
+    return Credential.credential_exist(name)
+
+
+def display_credential():
+    '''
+    function to display all credentials
+    '''
+    return Credential.display_credential()
 
 
 def main():
