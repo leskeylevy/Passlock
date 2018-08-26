@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.6
 from user import User
+from credential import Credential
 
 
 def create_user(fname, lname, email, Password):
@@ -37,12 +38,31 @@ def check_existing_user(lname):
     '''
     return User.user_exists()
 
+
 def display_user():
     '''
     function to return the saved user
     :return:
     '''
     return User.display_user()
+
+    # ________________________________CREDENTIALS_______________________________________
+
+
+def create_credential(site_name, userName, password, emailUsed):
+    '''
+    function to create new credential
+    :param site_name:
+    :param userName:
+    :param password:
+    :param emailUsed:
+    :return:
+    '''
+    new_credential = Credential(site_name, userName, password, emailUsed)
+    return new_credential
+
+
+
 
 def main():
     print("Hello Welcome to  Passlock.What is your name?")
@@ -52,66 +72,65 @@ def main():
     print('\n')
 
     while True:
-            print("Use these short codes to navigate the app :\n cu -> Sign up.\n da -> Display your account.\n ln -> "
-                  "Login.\n ex ->exit Passlock.")
+        print("Use these short codes to navigate the app :\n cu -> Sign up.\n da -> Display your account.\n ln -> "
+              "Login.\n ex ->exit Passlock.")
 
-            short_code = input().lower()
+        short_code = input().lower()
 
-            if short_code == 'cu':
-                print("New Passlock Account")
-                print("-"*100)
+        if short_code == 'cu':
+            print("New Passlock Account")
+            print("-" * 100)
 
-                print("First name ....")
-                f_name = input()
+            print("First name ....")
+            f_name = input()
 
-                print("Last name....")
-                l_name = input()
+            print("Last name....")
+            l_name = input()
 
-                print("Email address ...")
-                e_address = input()
+            print("Email address ...")
+            e_address = input()
 
-                print("Your Password .....")
-                print("*"*40)
-                pwd = input()
+            print("Your Password .....")
+            print("*" * 40)
+            pwd = input()
 
-                save_users(create_user(f_name,l_name,e_address,pwd))
+            save_users(create_user(f_name, l_name, e_address, pwd))
+            print('\n')
+            print(f" A New account for {f_name} {l_name} created")
+            print(f"You can now login to your account {l_name} using your Password.")
+            print('\n')
+
+        elif short_code == 'da':
+
+            if display_user():
+                print("Here is your account Details ")
                 print('\n')
-                print(f" A New account for {f_name} {l_name} created")
-                print(f"You can now login to your account {l_name} using your Password.")
-                print('\n')
-
-            elif short_code == 'da':
-
-                if display_user():
-                        print("Here is your account Details ")
-                        print('\n')
-                        for user in display_user():
-                            print(f"Full name:{user.first_name} {user.last_name} user name:{user.last_name} Email {user.email}")
-                            print('\n')
-                        else:
-                            print('\n')
-                            print("That user does not exist. Sign up to create user account")
-                            print('\n')
-
-                elif short_code == "ln":
-                        print("please Enter your last name.")
-                        account_name = input()
-                        print("please enter your password")
-                        password = input()
-                        if password == pwd:
-                            print("you are now logged in")
-                            print('-'*20)
-
-
+                for user in display_user():
+                    print(f"Full name:{user.first_name} {user.last_name} user name:{user.last_name} Email {user.email}")
+                    print('\n')
                 else:
-                        print("Wrong password try again!")
-            elif short_code == "ex":
-                        print(f"Thanks {user_name} and feel free to recomend  our services to your friends ")
-                        break
+                    print('\n')
+                    print("That user does not exist. Sign up to create user account")
+                    print('\n')
+
+            elif short_code == "ln":
+                print("please Enter your last name.")
+                account_name = input()
+                print("please enter your password")
+                password = input()
+                if password == pwd:
+                    print("you are now logged in")
+                    print('-' * 20)
+
+
             else:
-                    print("I really didnt get that.Please use the short codes")
+                print("Wrong password try again!")
+        elif short_code == "ex":
+            print(f"Thanks {user_name} and feel free to recomend  our services to your friends ")
+            break
+        else:
+            print("I really didnt get that.Please use the short codes")
 
 
-
-if __name__ =='__main__':
+if __name__ == '__main__':
     main()
