@@ -5,7 +5,7 @@ class User:
 
     user_list = [] #Empty user list
 
-    def __init__(self,first_name,last_name,email,location):
+    def __init__(self, first_name, last_name, email,Password):
         '''
         defining the properties for object user
 
@@ -19,7 +19,7 @@ class User:
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.location = location
+        self.Password = Password
 
     def save_user(self):
         '''
@@ -40,6 +40,12 @@ class User:
     def user_exists(cls,lname):
         for user in cls.user_list:
             if user.last_name == lname:
-                return True
+                return user
             return False
-
+    @classmethod
+    def display_user(cls):
+        '''
+        method to return the user
+        :return:
+        '''
+        return cls.user_list
