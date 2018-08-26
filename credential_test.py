@@ -20,12 +20,27 @@ class TestCredential(unittest.TestCase):
         self.assertEqual(self.new_credential.password, "mysecretpassword")
         self.assertEqual(self.new_credential.emailUsed, "leskeylevy@gmail.com")
 
+    def tearDown(self):
+        '''
+        method to clean up after each test case
+        '''
+        Credential.credential_list = []
+
     def test_save_credential(self):
         '''
         test tosee if credentials are being saved
         '''
         self.new_credential.save_credential()
         self.assertEqual(len(Credential.credential_list),1)
+
+    def test_save_multiple_credential(self):
+        '''
+        test to see if multiple credentials can be saved
+        '''
+        self.new_credential.save_credential()
+        test_credential = Credential('test.com','testuser','testpassword','testemail')
+        test_credential.save_credential()
+        self.assertEqual(len(Credential.credential_list),2)
 
 
 if __name__ =='__main__':
