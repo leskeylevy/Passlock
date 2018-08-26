@@ -38,3 +38,17 @@ class Credential:
         for credential in cls.credential_list:
             if credential.site_name == name:
                 return credential
+
+    @classmethod
+    def credential_exist(cls,name):
+        '''
+        method to search if the said credential exists
+        Args:
+            name:site name to search if exists
+        returns:
+            Boolean: Either true or false
+        '''
+        for credential in cls.credential_list:
+            if credential.site_name == name:
+                return True
+        return False
