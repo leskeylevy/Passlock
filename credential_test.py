@@ -52,6 +52,15 @@ class TestCredential(unittest.TestCase):
         self.new_credential.delete_credential()
         self.assertEqual(len(Credential.credential_list),1)
 
+    def test_find_credential_by_site_name(self):
+        '''
+        test to see if the user is able to search for credentials for a given site using the sites name
+        '''
+        self.new_credential.save_credential()
+        test_credential = Credential('test.com', 'testuser', 'testpassword', 'testemail')
+        test_credential.save_credential()
+        found_credential = Credential.find_by_name('test.com')
+        self.assertEqual(found_credential.site_name,test_credential.site_name)
 
 if __name__ =='__main__':
     unittest.main()

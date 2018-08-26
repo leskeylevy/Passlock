@@ -24,3 +24,17 @@ class Credential:
         delete method to delete saved credentials
         '''
         Credential.credential_list.remove(self)
+
+    @classmethod
+    def find_by_name(cls,name):
+        '''
+        method that takes site name and returns the credentials for that site
+        Args:
+            name: site name to search for
+        :return:
+            credentials for the site searched.
+        '''
+
+        for credential in cls.credential_list:
+            if credential.site_name == name:
+                return credential
