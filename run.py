@@ -98,6 +98,10 @@ def check_credential_exists(name):
     return Credential.credential_exist(name)
 
 
+def displaytarget_credential(name):
+    return Credential.find_by_name(name)
+
+
 def display_credential():
     '''
     function to display all credentials
@@ -169,6 +173,7 @@ def main():
                                 USE THESE SHORT CODES TO NAVIGATE THE APP:
                                 cc -> Create Credential.
                                 dc -> Display your credentials.
+                                dltc -> Delete credential.
                                 lut->Log out of your account.''')
                         short_code = input().lower()
                         if short_code == "cc":
@@ -193,12 +198,26 @@ def main():
                                 print("Here are credentials")
                                 print('\n')
                                 for credential in display_credential():
-                                    print(f"Site: {credential.site_name} ")
+                                    print(
+                                        f"Site: {credential.site_name} username:{credential.userName} Password:{credential.password} ")
                                     print('\n')
                             else:
                                 print('\n')
                                 print("You currently don't have any credentials to display")
                                 print('/n')
+
+                        elif short_code == "dltc":
+                            print("Enter the site name for the credential you want to delete!")
+                            site = input()
+                            sitefound = displaytarget_credential(site)
+
+                            if check_credential_exists(site):
+                                del_credential(sitefound)
+                                print("Credentials for this site have been deleted ")
+                            else:
+                                print("Site not found")
+
+
                         elif short_code == "lut":
                             print('\n')
                             print(f"you have logged out of your {lname} account")
