@@ -36,7 +36,7 @@ def check_existing_user(lname):
     '''
     checking if user exists
     '''
-    return User.user_exists()
+    return User.user_exists(lname)
 
 
 def display_user():
@@ -45,6 +45,13 @@ def display_user():
     :return:
     '''
     return User.display_user()
+
+
+def login_auth(last_name, password):
+    '''
+    function to authorise login
+    '''
+    return User.check_user(last_name, password)
 
     # ________________________________CREDENTIALS_______________________________________
 
@@ -112,7 +119,7 @@ def main():
         short_code = input().lower()
 
         if short_code == 'cu':
-            print("New Passlock Account")
+            print("Create a new Passlock Account")
             print("-" * 100)
 
             print("First name ....")
@@ -130,7 +137,7 @@ def main():
 
             save_users(create_user(f_name, l_name, e_address, pwd))
             print('\n')
-            print(f" A New account for {f_name} {l_name} created")
+            print(f" A New account for {f_name}{l_name} created")
             print(f"You can now login to your account {l_name} using your Password.")
             print('\n')
 
@@ -144,24 +151,71 @@ def main():
                     print('\n')
                 else:
                     print('\n')
-                    print("That user does not exist. Sign up to create user account")
+                    print("You currently dont have an account yet. Sign up to create user account")
                     print('\n')
 
-            elif short_code == "ln":
-                print("please Enter your last name.")
-                account_name = input()
-                print("please enter your password")
-                password = input()
-                if password == pwd:
-                    print("you are now logged in")
-                    print('-' * 20)
+        elif short_code == "ln":
+            print("please enter your last name")
+            lname = input()
+            print("\n Enter your Password")
+            pwd = input()
+            if check_existing_user(lname):
+                if login_auth(lname, pwd):
+                    while True:
+                        print('_' * 60)
+                        print(f"login successful .{lname} you are logged in")
+                        print('_' * 60)
+                        print('''
+                                USE THESE SHORT CODES TO NAVIGATE THE APP:
+                                cc -> Create Credential.
+                                dc -> Display your credentials.
+                                lut->Log out of your account.''')
+                        short_code = input().lower()
+                        if short_code == "cc":
+                            print("Create new Credential")
+                            print('-' * 20)
+                            print("Site name:...")
+                            site_name = input()
+                            print(f"{site_name} userName:....")
+                            usr_name = input()
+                            print(f"{site_name} password:..")
+                            print('*' * 20)
+                            password = input()
+                            print(f"{site_name} Email used:")
+                            email = input()
+
+                            save_credential(create_credential(site_name, usr_name, password, email))
+                            print('\n')
+                            print(f"A new {site_name} credential has been created.")
+                            print('\n')
+                        elif short_code == "dc":
+                            if display_credential():
+                                print("Here are credentials")
+                                print('\n')
+                                for credential in display_credential():
+                                    print(f"Site: {credential.site_name} ")
+                                    print('\n')
+                            else:
+                                print('\n')
+                                print("You currently don't have any credentials to display")
+                                print('/n')
+                        elif short_code == "lut":
+                            print('\n')
+                            print(f"you have logged out of your {lname} account")
+                            print('\n')
+                            break
+
+
+                else:
+                    print("Wrong Password or user name Please try again!")
 
 
             else:
-                print("Wrong password try again!")
+                print("THIs user is currently none existent Please up first")
         elif short_code == "ex":
             print(f"Thanks {user_name} and feel free to recomend  our services to your friends ")
             break
+
         else:
             print("I really didnt get that.Please use the short codes")
 

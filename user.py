@@ -3,9 +3,9 @@ class User:
     Class that generates instaces of Users
     '''
 
-    user_list = [] #Empty user list
+    user_list = []  # Empty user list
 
-    def __init__(self, first_name, last_name, email,Password):
+    def __init__(self, first_name, last_name, email, Password):
         '''
         defining the properties for object user
 
@@ -31,17 +31,18 @@ class User:
         User.user_list.remove(self)
 
     @classmethod
-    def find_by_last_name(cls,lname):
+    def find_by_last_name(cls, lname):
         for user in cls.user_list:
             if user.last_name == lname:
                 return user
 
     @classmethod
-    def user_exists(cls,lname):
+    def user_exists(cls, lname):
         for user in cls.user_list:
             if user.last_name == lname:
                 return user
             return False
+
     @classmethod
     def display_user(cls):
         '''
@@ -49,3 +50,9 @@ class User:
         :return:
         '''
         return cls.user_list
+
+    @classmethod
+    def check_user(cls, last_name, password):
+        for user in cls.user_list:
+            if user.last_name == last_name and user.Password == password:
+                return True
