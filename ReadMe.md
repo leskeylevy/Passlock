@@ -5,7 +5,7 @@
 In this app a user can login and create an account under which they can stored Credentials like password emails and username for all accounts they have for different sites like Facebook,Twitter ,Instagram ,Paypal and so on ,all under the same account for easy convinence especially to users prone to forgetting their passwords.
 ## Setup/Installation Requirements
 * To use this app you must have python3.6 or higher installed and some internet connection.
-* Form github ,clone this repository using Git clone on the terminal,navigate into the clone repository folder and run this command on the terminal ($./run.py ) to start using the app.
+* From github ,clone this repository using Git clone on the terminal,navigate into the clone repository folder and run this command on the terminal ($./run.py ) to start using the app.
 ## Known Bugs
 The generate password function is currently not worknig as it should but this developer is currently working on the solution.
 ## Technologies Used
